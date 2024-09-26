@@ -1,4 +1,12 @@
 @charset "UTF-8";
-body{
-	background-color: green;
+#link{
+	background: #ff5353;
+}
+
+#log{
+	background: #4fff4f;
+}
+
+legend{
+	background: #fed967;
 }
