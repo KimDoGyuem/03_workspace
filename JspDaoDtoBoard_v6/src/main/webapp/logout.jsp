@@ -9,16 +9,7 @@
 </head>
 <body>
 <%
-	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
-	
-	Dao dao = new Dao();
-	String loginId = dao.login(id,pw);
-	
-	//todo
-	//세션처리
-	session.setAttribute("xxx", loginId);
-	
+	session.invalidate();
 	response.sendRedirect("index.jsp");
 %>
 

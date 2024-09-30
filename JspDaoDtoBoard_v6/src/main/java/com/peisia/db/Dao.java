@@ -1,7 +1,35 @@
 package com.peisia.db;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 public class Dao extends Da{
+	public void reg(String id, String pw) {
+		super.connect();	//conect()라고 해도 됨.	//[고정1,2,3]
+		String sql = String.format("insert into member values ('%s','%s')"
+				,id,pw);
+		super.update(sql);
+		super.close();	//[고정4,5]
+	}
+	public String login(String id, String pw) {
+		super.connect();	//conect()라고 해도 됨.	//[고정1,2,3]
+		String sql = String.format("select id from member where id='%s' and pw='%s'"
+				,id,pw);
+		System.out.println("==== sql 로그"+sql);
+		String loginId = null;
+		try {
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next()) {
+				loginId = rs.getString("id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("==== 로그인 된 id : "+loginId);
+		super.close();	//[고정4,5]
+		
+		return loginId;
+	}
+	
 	/* (1/5)삭제 */
 	public void del(String no) {
 		super.connect();	//conect()라고 해도 됨.	//[고정1,2,3]
@@ -187,5 +215,13 @@ public class Dao extends Da{
 			totalPageCount = count / Board.LIST_AMOUNT + 1;
 		}
 		return totalPageCount;
+	}
+	
+	/* test */
+	public void test() {
+		super.connect();	//[고정1,2,3]
+		String sql = "update cat_test set no=no+1";
+		super.update(sql);
+		super.close();	//[고정4,5]
 	}	
 }
