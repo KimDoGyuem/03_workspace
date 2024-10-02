@@ -50,7 +50,20 @@ public class Test2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("idKey", id);
+		
+		if(id.equals("cat")&&pw.equals("1234")) {
+			session.setMaxInactiveInterval(5);
+		}
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<a href='index2.jsp'>id확인</a>");
+		
 	}
 
 }
